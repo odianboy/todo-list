@@ -1,0 +1,37 @@
+<div class="text-center">
+    <form (ngSubmit)="submit()">
+        <h1>Todo list📝</h1>
+        
+        <mat-grid-list cols="2" rowHeight="60px" >
+            <mat-grid-tile>
+                <mat-form-field class="example-full-width">  
+                    <input matInput placeholder="do home tasks" type="text" [formControl]="inputControl">
+                    <div *ngIf="inputControl.touched" class="validation">
+                        <small *ngIf="inputControl.hasError('required')">
+                            Введите название задачи
+                        </small>
+                    </div>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <button
+                    mat-raised-button color="primary"
+                    type="submit"
+                    [disabled]="inputControl.invalid"
+                >Добавить задачу</button>
+            </mat-grid-tile>
+          </mat-grid-list>
+    </form>
+    
+    <div>
+        <h2>Список задач:</h2>
+        
+        <app-task
+            *ngFor="let task of tasks$ | async"
+            [task]="task"
+            (onDeleted)="delTaskLocalStorage($event)"
+            (onCompleted)="comAddTaskLocalStorage($event)"
+        >
+        </app-task>
+    </div>
+</div>

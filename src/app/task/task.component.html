@@ -1,0 +1,13 @@
+<mat-grid-list cols="2" rowHeight="60px">
+    <mat-grid-tile>
+        <div
+            [ngClass]="{taskCom: task.completed}"
+            class="task"
+            (click)="complatedTask(task.id)">
+            {{ task.title }}
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-raised-button color="warn" (click)="deleteTask(task.id)">Удалить</button>
+    </mat-grid-tile>
+  </mat-grid-list>
